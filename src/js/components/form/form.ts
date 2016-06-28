@@ -11,7 +11,7 @@ import { Task } from '../../Classes';
 const html =
   `
     <li class="list-group-item">
-      <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)">
+      <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)" placeholder="Enter Task Title To Begin">
     </li>
   `
 // End Template
