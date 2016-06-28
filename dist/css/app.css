@@ -5740,7 +5740,6 @@ button.close {
 .slide-enter, .slide-leave {
   padding: 0;
   height: 0;
-  border: 0 solid transparent;
   margin: 0; }
 
 .button-circle {
@@ -5748,6 +5747,7 @@ button.close {
   text-align: center;
   padding: 0;
   width: 20px;
-  height: 20px; }
+  height: 20px;
+  margin-right: 10px; }
 
 /*# sourceMappingURL=app.css.map */

@@ -1,8 +1,9 @@
 // Import Definitions File
 import * as Vue from 'vue';
+import * as VueRouter from 'vue-router';
 
 // Import Components
-import {inputform} from './components/form/form';
+import { inputform } from './components/form/form';
 
 import { TaskInterface } from './Interfaces';
 import { Task } from './Classes';
@@ -30,7 +31,7 @@ export const vue = new Vue ({
   methods: {
     deleteTask(task: TaskInterface, tasks: Array<TaskInterface>){
       let index = tasks.indexOf(task);
-      tasks.splice(index,1);
+      tasks.splice(index, 1);
     },
     toggleComplete(task: TaskInterface){
       task.complete = !task.complete;
