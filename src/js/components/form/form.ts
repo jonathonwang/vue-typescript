@@ -1,17 +1,18 @@
 // Import Definitions File
 import * as Vue from 'vue';
 
-// Template Import
-import { template } from './form.template.ts';
-
 // Interface Imports
-import { TaskInterface } from '../../app.ts';
+import { TaskInterface } from '../../Interfaces';
 
 // Class Imports
-import { Task } from '../../app.ts';
+import { Task } from '../../Classes';
 
 export const inputform = Vue.extend({
-  template,
+  template: `
+  <li class="list-group-item">
+    <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)">
+  </li>
+  `,
   data(){
     return {
       newTask: {

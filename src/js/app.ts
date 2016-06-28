@@ -2,7 +2,10 @@
 import * as Vue from 'vue';
 
 // Import Components
-import { inputform } from './components/form/form.ts';
+import {inputform} from './components/form/form';
+
+import { TaskInterface } from './Interfaces';
+import { Task } from './Classes';
 
 /**
  * [Initialize new Vue]
@@ -35,18 +38,3 @@ export const vue = new Vue ({
   },
 
 })
-
-
-export interface TaskInterface {
-  title: string,
-  complete: boolean,
-}
-
-export class Task implements TaskInterface {
-  title: string;
-  complete: boolean;
-  constructor(title:string, complete:boolean){
-    this.title = title;
-    this.complete = complete;
-  }
-}

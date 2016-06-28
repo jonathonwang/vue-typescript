@@ -10192,12 +10192,22 @@ module.exports = Vue;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"_process":1}],3:[function(require,module,exports){
 "use strict";
-var Vue = require('vue');
-var form_ts_1 = require('./components/form/form.ts');
+class Task {
+    constructor(title, complete) {
+        this.title = title;
+        this.complete = complete;
+    }
+}
+exports.Task = Task;
+
+},{}],4:[function(require,module,exports){
+"use strict";
+const Vue = require('vue');
+const form_1 = require('./components/form/form');
 exports.vue = new Vue({
     el: 'html',
     components: {
-        inputform: form_ts_1.inputform
+        inputform: form_1.inputform
     },
     data: {
         newTask: {
@@ -10212,36 +10222,27 @@ exports.vue = new Vue({
         ]
     },
     methods: {
-        deleteTask: function (task, tasks) {
-            var index = tasks.indexOf(task);
+        deleteTask(task, tasks) {
+            let index = tasks.indexOf(task);
             tasks.splice(index, 1);
         },
-        toggleComplete: function (task) {
+        toggleComplete(task) {
             task.complete = !task.complete;
         }
     },
 });
-var Task = (function () {
-    function Task(title, complete) {
-        this.title = title;
-        this.complete = complete;
-    }
-    return Task;
-}());
-exports.Task = Task;
 
-},{"./components/form/form.ts":5,"vue":2}],4:[function(require,module,exports){
+},{"./components/form/form":5,"vue":2}],5:[function(require,module,exports){
 "use strict";
-exports.template = "\n  <li class=\"list-group-item\">\n    <input type=\"text\" class=\"form-control\" v-model=\"newTask.title\" @keyup.enter=\"createTask(newTask, tasks)\">\n  </li>\n";
-
-},{}],5:[function(require,module,exports){
-"use strict";
-var Vue = require('vue');
-var form_template_ts_1 = require('./form.template.ts');
-var app_ts_1 = require('../../app.ts');
+const Vue = require('vue');
+const Classes_1 = require('../../Classes');
 exports.inputform = Vue.extend({
-    template: form_template_ts_1.template,
-    data: function () {
+    template: `
+  <li class="list-group-item">
+    <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)">
+  </li>
+  `,
+    data() {
         return {
             newTask: {
                 title: '',
@@ -10253,16 +10254,16 @@ exports.inputform = Vue.extend({
         tasks: []
     },
     methods: {
-        createTask: function (task, tasks) {
-            var newTask = new app_ts_1.Task(task.title, task.complete);
+        createTask(task, tasks) {
+            let newTask = new Classes_1.Task(task.title, task.complete);
             tasks.push(newTask);
             task.title = '';
         },
     },
-    ready: function () {
+    ready() {
     }
 });
 
-},{"../../app.ts":3,"./form.template.ts":4,"vue":2}]},{},[3]);
+},{"../../Classes":3,"vue":2}]},{},[4]);
 
 //# sourceMappingURL=app.js.map
