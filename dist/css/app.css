@@ -5750,4 +5750,20 @@ button.close {
   height: 20px;
   margin-right: 10px; }
 
+li.list-group-item {
+  transition: .4s ease all;
+  background-color: #fff; }
+  li.list-group-item .delete-btn {
+    transition: .4s ease all;
+    opacity: 0; }
+  li.list-group-item:hover {
+    background-color: #e6e6e6; }
+    li.list-group-item:hover .delete-btn {
+      opacity: 1; }
+  li.list-group-item.incomplete .complete-btn {
+    color: green;
+    border-color: green; }
+  li.list-group-item.complete {
+    background-color: #d9d9d9; }
+
 /*# sourceMappingURL=app.css.map */

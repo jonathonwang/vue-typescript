@@ -3,6 +3,7 @@
     <title>TS Test</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../dist/css/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
   </head>
   <body>
 
@@ -12,25 +13,41 @@
           <h1 class="text-center">Hello World</h1>
           <ul class="list-group">
 
-            <!-- Input Fields -->
-            <!-- <li class="list-group-item">
-              <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)">
-            </li> -->
+            <!-- Create Input -->
             <inputform :tasks="tasks"></inputform>
+            <!-- /Create Input -->
 
             <!-- Incomplete Tasks -->
-            <li class="list-group-item" v-for="task in tasks" v-if="task.complete == false" transition="slide">
-              <button class="btn btn-primary btn-xs button-circle" @click.prevent="toggleComplete(task)">&check;</button>
-              {{ task.title }}
-              <button class="btn btn-xs btn-danger pull-right" @click.prevent="deleteTask(task, tasks)">Delete</button>
+            <li class="list-group-item" :class="{ 'incomplete' : task.complete == false }" v-for="task in tasks" v-if="task.complete == false" transition="slide">
+              <!-- Complete Btn -->
+              <button class="btn btn-default btn-xs button-circle complete-btn" @click.prevent="toggleComplete(task)" v-if="task.edit == false">
+                <span class="fa fa-check"></span>
+              </button>
+              <!-- Task Title -->
+              <span @dblclick.prevent="toggleEdit(task)" v-if="task.edit == false">{{ task.title }}</span>
+              <!-- Edit Task Input -->
+              <input type="text" class="form-control" v-else :value="task.title" @keyup.enter="submitEdit(task, $event)">
+              <!-- Delete Task Btn -->
+              <button class="btn btn-xs btn-danger pull-right delete-btn" @click.prevent="deleteTask(task, tasks)" v-if="task.edit == false">
+                Delete
+              </button>
             </li>
+            <!-- /Incomplete Tasks -->
 
-            <!-- Complete Tasks -->
-            <li class="list-group-item" style="background-color:#ccc" v-for="task in tasks" v-if="task.complete == true" transition="slide">
-              <button class="btn btn-primary btn-xs button-circle" @click.prevent="toggleComplete(task)">&times;</button>
-              Done
-              <button class="btn btn-xs btn-danger pull-right" @click.prevent="deleteTask(task, tasks)">Delete</button>
+            <!-- Completed Tasks -->
+            <li class="list-group-item" :class="{ 'complete' : task.complete == true }" v-for="task in tasks" v-if="task.complete == true" transition="slide">
+              <!-- Incomplete Btn -->
+              <button class="btn btn-default btn-xs button-circle complete-btn" @click.prevent="toggleComplete(task)">
+                <span class="fa fa-times"></span>
+              </button>
+              <!-- Task Title -->
+              {{ task.title }} ( Completed )
+              <!-- Delete Task Btn -->
+              <button class="btn btn-xs btn-danger pull-right delete-btn" @click.prevent="deleteTask(task, tasks)">
+                Delete
+              </button>
             </li>
+            <!-- /Completed Tasks -->
 
           </ul>
         </div>

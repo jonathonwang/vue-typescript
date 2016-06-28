@@ -10196,6 +10196,7 @@ class Task {
     constructor(title, complete) {
         this.title = title;
         this.complete = complete;
+        this.edit = false;
     }
 }
 exports.Task = Task;
@@ -10210,21 +10211,27 @@ exports.vue = new Vue({
         inputform: form_1.inputform
     },
     data: {
-        newTask: {
-            title: '',
-            complete: false
-        },
         tasks: [
-            { title: 'task1', complete: false },
-            { title: 'task2', complete: false },
-            { title: 'task3', complete: false },
-            { title: 'task4', complete: false },
+            { title: 'task1', complete: false, edit: false },
+            { title: 'task2', complete: false, edit: false },
+            { title: 'task3', complete: false, edit: false },
+            { title: 'task4', complete: false, edit: false }
         ]
     },
     methods: {
         deleteTask(task, tasks) {
             let index = tasks.indexOf(task);
             tasks.splice(index, 1);
+        },
+        toggleEdit(task) {
+            task.edit = true;
+        },
+        submitEdit(task, event) {
+            if (event.target.value !== '') {
+                let value = event.target.value;
+                task.title = value;
+                task.edit = false;
+            }
         },
         toggleComplete(task) {
             task.complete = !task.complete;
@@ -10236,17 +10243,19 @@ exports.vue = new Vue({
 "use strict";
 const Vue = require('vue');
 const Classes_1 = require('../../Classes');
+const html = `
+    <li class="list-group-item">
+      <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)">
+    </li>
+  `;
 exports.inputform = Vue.extend({
-    template: `
-  <li class="list-group-item">
-    <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)">
-  </li>
-  `,
+    template: html,
     data() {
         return {
             newTask: {
                 title: '',
-                complete: false
+                complete: false,
+                edit: false
             },
         };
     },
@@ -10255,13 +10264,13 @@ exports.inputform = Vue.extend({
     },
     methods: {
         createTask(task, tasks) {
-            let newTask = new Classes_1.Task(task.title, task.complete);
-            tasks.push(newTask);
-            task.title = '';
+            if (task.title !== '') {
+                let newTask = new Classes_1.Task(task.title, task.complete);
+                tasks.push(newTask);
+                task.title = '';
+            }
         },
     },
-    ready() {
-    }
 });
 
 },{"../../Classes":3,"vue":2}]},{},[4]);

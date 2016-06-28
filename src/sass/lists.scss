@@ -1,0 +1,24 @@
+li.list-group-item{
+  transition: .4s ease all;
+  background-color: #fff;
+  .delete-btn{
+    transition: .4s ease all;
+    opacity: 0;
+  }
+  &:hover{
+    background-color: darken(#fff,10%);
+    .delete-btn{
+      opacity: 1;
+    }
+  }
+
+  &.incomplete{
+    .complete-btn{
+      color: green;
+      border-color: green;
+    }
+  }
+  &.complete{
+    background-color: darken(#fff, 15%);
+  }
+}

@@ -7,17 +7,23 @@ import { TaskInterface } from '../../Interfaces';
 // Class Imports
 import { Task } from '../../Classes';
 
+// Start Template
+const html =
+  `
+    <li class="list-group-item">
+      <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)">
+    </li>
+  `
+// End Template
+
 export const inputform = Vue.extend({
-  template: `
-  <li class="list-group-item">
-    <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)">
-  </li>
-  `,
+  template: html,
   data(){
     return {
       newTask: {
         title: '',
-        complete: false
+        complete: false,
+        edit: false
       },
     }
   },
@@ -26,12 +32,12 @@ export const inputform = Vue.extend({
   },
   methods: {
     createTask(task: TaskInterface, tasks: Array<TaskInterface>){
-      let newTask = new Task(task.title, task.complete);
-      tasks.push(newTask);
-      task.title = '';
+      if(task.title !== ''){
+        let newTask = new Task(task.title, task.complete);
+        tasks.push(newTask);
+        task.title = '';
+      }
     },
   },
-  ready(){
-  }
 
 });
