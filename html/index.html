@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>TS Test</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../dist/css/app.css">
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+          <h1 class="text-center">Hello World</h1>
+          <ul class="list-group">
+
+            <!-- Input Fields -->
+            <!-- <li class="list-group-item">
+              <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)">
+            </li> -->
+            <inputform :tasks="tasks"></inputform>
+
+            <!-- Incomplete Tasks -->
+            <li class="list-group-item" v-for="task in tasks" v-if="task.complete == false" transition="slide">
+              <button class="btn btn-primary btn-xs button-circle" @click.prevent="toggleComplete(task)">&check;</button>
+              {{ task.title }}
+              <button class="btn btn-xs btn-danger pull-right" @click.prevent="deleteTask(task, tasks)">Delete</button>
+            </li>
+
+            <!-- Complete Tasks -->
+            <li class="list-group-item" style="background-color:#ccc" v-for="task in tasks" v-if="task.complete == true" transition="slide">
+              <button class="btn btn-primary btn-xs button-circle" @click.prevent="toggleComplete(task)">&times;</button>
+              Done
+              <button class="btn btn-xs btn-danger pull-right" @click.prevent="deleteTask(task, tasks)">Delete</button>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="../dist/js/app.js"></script>
+  </body>
+</html>
