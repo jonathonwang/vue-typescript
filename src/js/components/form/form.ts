@@ -5,12 +5,13 @@ import { extend as AppExtend } from 'vue';
 import { TaskInterface } from '../../Interfaces';
 import { Task } from '../../Classes';
 
-
 // Start Template
 const html =
   `
   <li class="list-group-item">
-    <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)" placeholder="Enter Task Title To Begin">
+    <input type="text" class="form-control" placeholder="Enter Task Title To Begin"
+     v-model="newTask.title"
+     @keyup.enter="createTask(newTask, tasks)">
   </li>
   `
 // End Template
@@ -23,11 +24,7 @@ export const inputform: Object = AppExtend({
   template: html,
   data(): Object {
     return {
-      newTask: {
-        title: '',
-        complete: false,
-        edit: false
-      },
+      newTask: new Task('', false)
     }
   },
   props: {
@@ -42,5 +39,4 @@ export const inputform: Object = AppExtend({
       }
     }
   }
-
 });

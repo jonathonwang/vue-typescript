@@ -13,6 +13,7 @@ import { Task } from './Classes';
  * [Vue Main App]
  * @param  {'html'} {el [element to initialize Vue]
  */
+
 export const app = new Vue({
   el: 'html',
   components: {
@@ -44,9 +45,12 @@ export const app = new Vue({
     },
     toggleComplete(task: TaskInterface): void{
       task.complete = !task.complete;
-    }
+    },
   },
   ready(): void{
+    // this.methods.logger();
   }
 
 })
+
+console.log(app.$data.tasks[0]);

@@ -10198,6 +10198,12 @@ class Task {
         this.complete = complete;
         this.edit = false;
     }
+    getCreatedDate() {
+        return this.created.createdDate;
+    }
+    getCompletedDate() {
+        return this.completed.completedDate;
+    }
 }
 exports.Task = Task;
 
@@ -10237,11 +10243,12 @@ exports.app = new Vue({
         },
         toggleComplete(task) {
             task.complete = !task.complete;
-        }
+        },
     },
     ready() {
     }
 });
+console.log(exports.app.$data.tasks[0]);
 
 },{"./Classes":3,"./components/form/form":5,"vue":2}],5:[function(require,module,exports){
 "use strict";
@@ -10249,18 +10256,16 @@ const vue_1 = require('vue');
 const Classes_1 = require('../../Classes');
 const html = `
   <li class="list-group-item">
-    <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)" placeholder="Enter Task Title To Begin">
+    <input type="text" class="form-control" placeholder="Enter Task Title To Begin"
+     v-model="newTask.title"
+     @keyup.enter="createTask(newTask, tasks)">
   </li>
   `;
 exports.inputform = vue_1.extend({
     template: html,
     data() {
         return {
-            newTask: {
-                title: '',
-                complete: false,
-                edit: false
-            },
+            newTask: new Classes_1.Task('', false)
         };
     },
     props: {
