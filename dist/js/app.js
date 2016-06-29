@@ -10205,17 +10205,19 @@ exports.Task = Task;
 "use strict";
 const Vue = require('vue');
 const form_1 = require('./components/form/form');
-exports.vue = new Vue({
+const Classes_1 = require('./Classes');
+exports.app = new Vue({
     el: 'html',
     components: {
         inputform: form_1.inputform
     },
     data: {
         tasks: [
-            { title: 'task1', complete: false, edit: false },
-            { title: 'task2', complete: false, edit: false },
-            { title: 'task3', complete: false, edit: false },
-            { title: 'task4', complete: false, edit: false }
+            new Classes_1.Task('Task1', false),
+            new Classes_1.Task('Task2', false),
+            new Classes_1.Task('Task3', false),
+            new Classes_1.Task('Task4', false),
+            new Classes_1.Task('Task5', false)
         ]
     },
     methods: {
@@ -10237,18 +10239,20 @@ exports.vue = new Vue({
             task.complete = !task.complete;
         }
     },
+    ready() {
+    }
 });
 
-},{"./components/form/form":5,"vue":2}],5:[function(require,module,exports){
+},{"./Classes":3,"./components/form/form":5,"vue":2}],5:[function(require,module,exports){
 "use strict";
-const Vue = require('vue');
+const vue_1 = require('vue');
 const Classes_1 = require('../../Classes');
 const html = `
-    <li class="list-group-item">
-      <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)" placeholder="Enter Task Title To Begin">
-    </li>
+  <li class="list-group-item">
+    <input type="text" class="form-control" v-model="newTask.title" @keyup.enter="createTask(newTask, tasks)" placeholder="Enter Task Title To Begin">
+  </li>
   `;
-exports.inputform = Vue.extend({
+exports.inputform = vue_1.extend({
     template: html,
     data() {
         return {
@@ -10269,8 +10273,8 @@ exports.inputform = Vue.extend({
                 tasks.push(newTask);
                 task.title = '';
             }
-        },
-    },
+        }
+    }
 });
 
 },{"../../Classes":3,"vue":2}]},{},[4]);
